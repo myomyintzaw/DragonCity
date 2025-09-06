@@ -30,10 +30,7 @@ class ProductController extends Controller
             $data['image'] = $imageName;
         }
 
-
         Product::create($data);
-    
-
 
         return back()->with(['success' => 'Product creation success']);
     }

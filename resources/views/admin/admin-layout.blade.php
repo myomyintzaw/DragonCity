@@ -273,7 +273,7 @@
             </li>
 
 
-                  <!-- Order Nav -->
+            <!-- Order Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#order" data-bs-toggle="collapse"
                     href="#">
@@ -290,6 +290,33 @@
                     </li>
                 </ul>
             </li>
+
+            <!-- Account Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#account" data-bs-toggle="collapse"
+                    href="#">
+
+                    {{-- <i class="fa-solid fa-users-line"></i> --}}
+                  <i class="fa-solid fa-users"></i>
+                  <span>Account</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="account" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                    <li>
+                        <a href="{{route('user.list')}}">
+                            <i class="bi bi-square"></i><span>User List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.list')}}">
+                            <i class="bi bi-square"></i><span>Admin List</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
 
 
 

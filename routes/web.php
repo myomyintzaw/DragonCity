@@ -72,18 +72,35 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         });
 
         //Order URLs
-        Route::prefix('admin/order')->group(function(){
-            Route::get('/list',[OrderController::class,'orderList'])->name('order.list');
-            Route::get('/deliver/{number}',[OrderController::class,'orderDeliver'])->name('order.deliver');
-            Route::get('/detail/{number}',[OrderDetailController::class,'orderDetail'])->name('order.detail');
-            Route::get('/delete/{number}',[OrderController::class,'orderDelete'])->name('order.delete');
-
-
-
-
+        Route::prefix('admin/order')->group(function () {
+            Route::get('/list', [OrderController::class, 'orderList'])->name('order.list');
+            Route::get('/deliver/{number}', [OrderController::class, 'orderDeliver'])->name('order.deliver');
+            Route::get('/detail/{number}', [OrderDetailController::class, 'orderDetail'])->name('order.detail');
+            Route::get('/delete/{number}', [OrderController::class, 'orderDelete'])->name('order.delete');
         });
 
+
+        //User Account URLs
+        Route::prefix('admin/account/user')->group(function () {
+            Route::get('/list', [AdminController::class, 'userList'])->name('user.list');
+            Route::get('/detail/{id}', [AdminController::class, 'userDetail'])->name('user.detail');
+            Route::get('/promote/{id}', [AdminController::class, 'promote'])->name('promote');
+            Route::get('/delete/{id}', [AdminController::class, 'userDelete'])->name('user.delete');
+        });
+
+
+        //Admin Account URLs
+        Route::prefix('admin/account/')->group(function () {
+            Route::get('/list', [AdminController::class, 'adminList'])->name('admin.list');
+            Route::get('/detail/{id}', [AdminController::class, 'adminDetail'])->name('admin.detail');
+            Route::get('/demote/{id}', [AdminController::class, 'demote'])->name('demote');
+            Route::get('/delete/{id}', [AdminController::class, 'adminDelete'])->name('admin.delete');
+
+        });
     });
+
+
+
 
 
     //User Middleware
@@ -106,42 +123,26 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
 
 
+    // Route::get('/', function () {
+    //     return view('dragoncity');
+    // });
+
+    // Route::get('/dashboard', function () {
+    //     return view('dragoncity');
+    // })->name('dragoncity.home');
 
 
 
-
-
-
-
-
-
-
-
-
-        // Route::get('/', function () {
-        //     return view('dragoncity');
-        // });
-
-        // Route::get('/dashboard', function () {
-        //     return view('dragoncity');
-        // })->name('dragoncity.home');
-
-
-
-        // Using Middleware
-        // Route::middleware([
-        //     'auth:sanctum',
-        //     config('jetstream.auth_session'),
-        //     'verified',
-        // ])->group(function () {
-        //     Route::get('/', function () {
-        //         return view('dragoncity');
-        //     })->name('/');
-        // });
-
-
-
-
+    // Using Middleware
+    // Route::middleware([
+    //     'auth:sanctum',
+    //     config('jetstream.auth_session'),
+    //     'verified',
+    // ])->group(function () {
+    //     Route::get('/', function () {
+    //         return view('dragoncity');
+    //     })->name('/');
+    // });
 
 
 

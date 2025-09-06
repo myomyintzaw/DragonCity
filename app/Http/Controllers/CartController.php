@@ -15,13 +15,25 @@ class CartController extends Controller
         // logger($request->all());
         // logger($request);
 
-        $data = [
-            'user_id' => $request->user_id,
-            'product_id' => $request->product_id,
-            'qty' => $request->qty,
-        ];
+        $productData = Cart::where('product_id', $request->product_id)->first();
 
-        Cart::create($data);
+        if ($productData != null && $productData->user_id == $request->user_id) {
+
+            $productData = $productData->qty + $request->qty;
+
+            Cart::where('user_id', $request->user_id)->update($productData);
+        } else {
+
+            $data = [
+                'user_id' => $request->user_id,
+                'product_id' => $request->product_id,
+                'qty' => $request->qty,
+            ];
+
+            Cart::create($data);
+        }
+
+        $productData = null;
 
         return response(200);
         // ->json(['status'=>'success','data'=>$data]);
@@ -39,33 +51,32 @@ class CartController extends Controller
             // ->orderBy('id','desc')
             ->get();
 
-            $AllTotal = 0;
-            foreach($cart_items as $item){
-                $AllTotal += $item->qty * $item->product_price;
-            }
-            // logger($AllTotal);
+        $AllTotal = 0;
+        foreach ($cart_items as $item) {
+            $AllTotal += $item->qty * $item->product_price;
+        }
+        // logger($AllTotal);
 
-            // dd($cart_items->toArray());
-            return view('cart',compact('cart_items','AllTotal'));
+        // dd($cart_items->toArray());
+        return view('cart', compact('cart_items', 'AllTotal'));
         // return view('cart', ['cart_items' => $cart_items]);
 
     }
 
 
     //Delete Product In Cart
-    public function deleteProduct(Request $request){
+    public function deleteProduct(Request $request)
+    {
         // logger($request);
-        Cart::where('id',$request->cartId)
-        ->where('user_id',Auth::user()->id)
-        ->delete();
+        Cart::where('id', $request->cartId)
+            ->where('user_id', Auth::user()->id)
+            ->delete();
     }
 
-   //Cart Clear
-   public function cartClear(){
-    Cart::where('user_id',Auth::user()->id)->delete();
-    return redirect()->route('dragoncity.home');
-   }
-
-
-
+    //Cart Clear
+    public function cartClear()
+    {
+        Cart::where('user_id', Auth::user()->id)->delete();
+        return redirect()->route('dragoncity.home');
+    }
 }

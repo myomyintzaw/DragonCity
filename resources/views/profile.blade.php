@@ -114,14 +114,14 @@
                                 </div>
 
                                 <div class="row mt-3">
-                                    <div class="col-lg-3 col-md-4 label "><i
-                                            class="fa-solid fa-envelope-open-text me-2"></i>Email:</div>
+                                    <div class="col-lg-3 col-md-4 label ">
+                                        <i class="fa-solid fa-envelope-open-text me-2"></i>Email:</div>
                                     <div class="col-lg-9 col-md-8">{{ Auth::user()->email }}</div>
                                 </div>
 
                                 <div class="row mt-3">
-                                    <div class="col-lg-3 col-md-4 label "><i
-                                            class="fa-solid fa-mobile-screen-button me-2"></i>Phone:</div>
+                                    <div class="col-lg-3 col-md-4 label ">
+                                        <i class="fa-solid fa-mobile-screen-button me-2"></i>Phone:</div>
                                     <div class="col-lg-9 col-md-8">{{ Auth::user()->phone }}</div>
                                 </div>
 
@@ -129,7 +129,7 @@
                                     <div class="col-lg-3 col-md-4 label "><i
                                             class="fa-solid fa-address-book me-2"></i>Address:</div>
                                     <div class="col-lg-9 col-md-8">{{ Auth::user()->address}} @if (Auth::user()->address == null)
-                                        N/A 
+                                        N/A
                                     @endif</div>
                                 </div>
                             </div>
