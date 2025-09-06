@@ -3,12 +3,14 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DragoncityController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Rules\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,7 @@ Route::get('/shop/{id}', [DragoncityController::class, 'shop'])->name('dragoncit
 Route::get('/dashboard', [DragoncityController::class, 'home'])->name('dragoncity.home');
 
 
-
+Route::post('/contact',[ContactController::class,'contact'])->name('contact');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::middleware(['prevent-back-history'])->group(function () {
@@ -95,8 +97,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             Route::get('/detail/{id}', [AdminController::class, 'adminDetail'])->name('admin.detail');
             Route::get('/demote/{id}', [AdminController::class, 'demote'])->name('demote');
             Route::get('/delete/{id}', [AdminController::class, 'adminDelete'])->name('admin.delete');
-
         });
+
+        //Contact URLs
+        Route::prefix('admin/contact')->group(function(){
+            Route::get('/list',[ContactController::class,'list'])->name('contact.list');
+            Route::get('/detail/{id}',[ContactController::class,'detail'])->name('contact.detail');
+            Route::get('/delete/{id}',[ContactController::class,'delete'])->name('contact.delete');
+        });
+
     });
 
 

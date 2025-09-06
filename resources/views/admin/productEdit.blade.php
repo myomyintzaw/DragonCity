@@ -55,7 +55,8 @@
 
 
                         <!-- Product Form-->
-                        <form action="{{route('product.update',$productData->id)}}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('product.update', $productData->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
 
 
@@ -77,7 +78,7 @@
                                 <label for="productName" class="form-label">Name</label>
                                 <input type="text" name="productName" id="productName"
                                     class="form-control @error('productName') is-invalid @enderror"
-                                    placeholder="Product name" value="{{ old('productName',$productData->name) }}">
+                                    placeholder="Product name" value="{{ old('productName', $productData->name) }}">
 
                                 @error('productName')
                                     <div class="text-danger">
@@ -91,7 +92,7 @@
                                 <label for="productSeries" class="form-label">Series</label>
                                 <input type="text" name="productSeries" id="productSeries"
                                     class="form-control @error('productSeries') is-invalid @enderror"
-                                    placeholder="Product series" value="{{ old('productSeries',$productData->series) }}">
+                                    placeholder="Product series" value="{{ old('productSeries', $productData->series) }}">
 
                                 @error('productSeries')
                                     <div class="text-danger">
@@ -109,7 +110,8 @@
                                     aria-label="Default select">
                                     <option value="">Choose category...</option>
                                     @foreach ($categoryData as $category)
-                                        <option value="{{ $category->id }}" @if(old('categoryId',$productData->category_id) == $category->id) selected @endif>
+                                        <option value="{{ $category->id }}"
+                                            @if (old('categoryId', $productData->category_id) == $category->id) selected @endif>
                                             {{ $category->name }}
                                         </option>
                                     @endforeach
@@ -127,7 +129,7 @@
                             <div class="form-group mb-4">
                                 <label for="productDescription" class="form-label">Description</label>
                                 <textarea name="productDescription" id="productDescription"
-                                    class="form-control @error('productDescription') is-invalid @enderror" placeholder="Product description">{{ old('productDescription',$productData->description) }}</textarea>
+                                    class="form-control @error('productDescription') is-invalid @enderror" placeholder="Product description">{{ old('productDescription', $productData->description) }}</textarea>
                                 @error('productDescription')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -141,7 +143,7 @@
                                 <label for="productPrice" class="form-label">Price</label>
                                 <input type="number" name="productPrice" id="productPrice"
                                     class="form-control @error('productPrice') is-invalid @enderror"
-                                    placeholder="Product price" value="{{ old('productPrice',$productData->price) }}">
+                                    placeholder="Product price" value="{{ old('productPrice', $productData->price) }}">
 
                                 @error('productPrice')
                                     <div class="text-danger">
@@ -165,10 +167,6 @@
             </div>
 
         </div>
-
-
-
-
 
 
 

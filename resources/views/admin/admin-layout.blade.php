@@ -44,7 +44,7 @@
         <!--Logo-->
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-                <img src="{{ asset('images/logo.png') }}" alt="logo" title="Home" width="40" height="40" >
+                <img src="{{ asset('images/logo.png') }}" alt="logo" title="Home" width="40" height="40">
                 <span class="d-none d-lg-block text-info" title="Home">Dragon City</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -230,42 +230,40 @@
 
             <!-- Category Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#category" data-bs-toggle="collapse"
-                    href="#">
+                <a class="nav-link collapsed" data-bs-target="#category" data-bs-toggle="collapse" href="#">
                     {{-- <i class="bi bi-menu-button-wide"></i><span>Category</span> --}}
                     <i class="fa-solid fa-laptop"></i><span>Category</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="category" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{route('category.page')}}">
+                        <a href="{{ route('category.page') }}">
                             <i class="bi bi-square"></i><span>Create Category</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('category.list')}}">
+                        <a href="{{ route('category.list') }}">
                             <i class="bi bi-square"></i><span>Category List</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
-               <!-- Product Nav -->
+            <!-- Product Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#product" data-bs-toggle="collapse"
-                    href="#">
+                <a class="nav-link collapsed" data-bs-target="#product" data-bs-toggle="collapse" href="#">
                     {{-- <i class="bi bi-menu-button-wide"></i><span>Category</span> --}}
                     <i class="fa-solid fa-computer"></i><span>Product</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="product" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{route('product.page')}}">
+                        <a href="{{ route('product.page') }}">
                             <i class="bi bi-square"></i><span>Create Product</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('product.list')}}">
+                        <a href="{{ route('product.list') }}">
                             <i class="bi bi-square"></i><span>Product List</span>
                         </a>
                     </li>
@@ -275,16 +273,15 @@
 
             <!-- Order Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#order" data-bs-toggle="collapse"
-                    href="#">
+                <a class="nav-link collapsed" data-bs-target="#order" data-bs-toggle="collapse" href="#">
                     {{-- <i class="bi bi-menu-button-wide"></i><span>Category</span> --}}
-                   <i class="fa-solid fa-cube"></i><span>Order</span>
+                    <i class="fa-solid fa-cube"></i><span>Order</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="order" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
                     <li>
-                        <a href="{{route('order.list')}}">
+                        <a href="{{ route('order.list') }}">
                             <i class="bi bi-square"></i><span>Order List</span>
                         </a>
                     </li>
@@ -293,31 +290,45 @@
 
             <!-- Account Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#account" data-bs-toggle="collapse"
-                    href="#">
+                <a class="nav-link collapsed" data-bs-target="#account" data-bs-toggle="collapse" href="#">
 
                     {{-- <i class="fa-solid fa-users-line"></i> --}}
-                  <i class="fa-solid fa-users"></i>
-                  <span>Account</span>
+                    <i class="fa-solid fa-users"></i>
+                    <span>Account</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="account" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
                     <li>
-                        <a href="{{route('user.list')}}">
+                        <a href="{{ route('user.list') }}">
                             <i class="bi bi-square"></i><span>User List</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.list')}}">
+                        <a href="{{ route('admin.list') }}">
                             <i class="bi bi-square"></i><span>Admin List</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
+            <!-- Contact Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#contact" data-bs-toggle="collapse" href="#">
+                    <i class="fa-solid fa-id-card fa-xl"></i>
+                    <span>Contact</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="contact" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
+                    <li>
+                        <a href="{{ route('contact.list') }}">
+                            <i class="bi bi-square"></i><span>Contact List</span>
+                        </a>
+                    </li>
 
+                </ul>
+            </li>
 
 
         </ul>

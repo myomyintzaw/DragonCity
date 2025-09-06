@@ -77,7 +77,7 @@
                                 <label for="category" class="form-label">Category</label>
                                 <select name="categoryId" id="category"
                                     class="form-select @error('categoryId') is-invalid @enderror"
-                                    aria-label="Default select" >
+                                    aria-label="Default select">
                                     <option value="">Choose category...</option>
                                     @foreach ($data as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -146,10 +146,6 @@
             </div>
 
         </div>
-
-
-
-
 
 
 

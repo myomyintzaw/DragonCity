@@ -99,8 +99,8 @@
 
                         <div class="mb-3 mt-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="phone" class="form-control @error('phone') is-invalid @enderror"
-                                name="phone" id="phone" placeholder="Phone" value="{{ old('phone') }}">
+                            <input type="tel" class="form-control @error('phone') is-invalid @enderror"
+                                name="phone" id="phone" placeholder="Tel - 09689491869" value="{{ old('phone') }}" pattern="[0-9]{9,15}" required>
                             @error('phone')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

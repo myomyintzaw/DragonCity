@@ -118,13 +118,6 @@ class ProductController extends Controller
 
 
 
-
-
-
-
-
-
-
     //Private Function for Data Arrange
     private function dataArrange($request)
     {

@@ -127,7 +127,7 @@
     --------------------------------------------- --}}
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer" style="margin-top: 50vh;">
+    <footer id="footer" class="footer" style="margin-top: 0vh;">
 
         <div class="container">
             <div class="row gy-3">

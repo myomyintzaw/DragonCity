@@ -3,6 +3,18 @@
 @section('title', 'Royal Dragon')
 
 @section('content')
+    <!---Success message---->
+    <div class="text-center mx-2" style="margin-top: 90px;">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fa-solid fa-square-check me-2"></i> <strong>{{ session('success') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+    </div>
+    <!---End Success message---->
+
+
     <!-- ======= Home Section ======= -->
     <section id="home" class="hero d-flex align-items-center section-bg">
         <div class="container">
@@ -11,10 +23,11 @@
                 <div
                     class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
                     <h2 data-aos="fade-up">Follow Your Dreams <br> With Our Services </h2>
-                    <p data-aos="fade-up" data-aos-delay="100">Royal Dragon is one of the best laptop shop in U.S and you can
+                    <p data-aos="fade-up" data-aos-delay="100">Royal Dragon is one of the best laptop shop in U.S and you
+                        can
                         order from anywhere and anytime.We have good services for your... </p>
                     <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-                        <a href="/user/home#menu" class="btn-book-a-table">Order Now!</a>
+                        <a href="/#product" class="btn-book-a-table">Order Now!</a>
                         <a href="https://www.google.com/search?q=microsoft+surface+advideo&oq=microsoft+surface+advideo&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigAdIBCjc0MzYwajBqMTWoAgiwAgHxBU3wKBPzAjCc&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:77c19a5e,vid:0Z0dNyjvYPM,st:0"
                             class="glightbox btn-watch-video d-flex align-items-center"><i
                                 class="bi bi-play-circle"></i><span></span></a>Best Selling
@@ -330,19 +343,6 @@
             </div>
             <!-- End MsiProducts -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     </section>
     <!-- End Product Section -->
 
@@ -352,29 +352,17 @@
 @section('cartBtn')
     {{-- <a class="btn-book-a-table" href="#book-a-table"> <i class="fa-solid fa-cart-shopping me-2"></i>Cart</a> --}}
 
-    <a class="btn btn-danger position-relative" href="{{route('cart')}}"> <i class="fa-solid fa-cart-shopping me-2"></i>Cart
-        @if(count($cartData) !=0)
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-white text-danger">
-            {{-- {{ isset($cartData) ? count($cartData) : 0 }} --}}
-            {{ count($cartData) }}
-        </span>
+    <a class="btn btn-danger position-relative" href="{{ route('cart') }}"> <i
+            class="fa-solid fa-cart-shopping me-2"></i>Cart
+        @if (count($cartData) != 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-white text-danger">
+                {{-- {{ isset($cartData) ? count($cartData) : 0 }} --}}
+                {{ count($cartData) }}
+            </span>
         @endif
     </a>
 @endsection
-    <!-- ========= End Cart Button Section ======== -->
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- ========= End Cart Button Section ======== -->
 
 
 
@@ -774,26 +762,49 @@
         </div>
 
         <!--Start Contact Form -->
-        <div class="form-control mt-4">
-            <form action="" method="post" role="form" class=" p-3 p-md-4">
+        <div class="form-control mt-0">
+            <form action="{{ route('contact') }}" method="post" role="form" class=" p-3 p-md-4">
                 @csrf
                 <div class="row mt-4">
                     <div class="col-xl-6">
-                        <input type="text" name="name" class="form-control" id="name"
-                            placeholder="your name">
+                        <input type="text" name="name" @error('name') is-invalid @enderror class="form-control"
+                            id="name" placeholder="Name" value="{{ old('name') }}">
+                        @error('name')
+                            <div class="text-danger offset-xxl-2 offset-3">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div class="col-xl-6">
-                        <input type="email" class="form-control" name="email" id="email"
-                            placeholder="your email">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                            name="email" id="email" placeholder="Email" value="{{ old('email') }}">
+                        @error('email')
+                            <div class="text-danger offset-xxl-2 offset-3">{{ $message }}</div>
+                        @enderror
                     </div>
+
                 </div>
+
+
                 <div class="mt-4">
-                    <input type="text" class="form-control" name="phone" id="subject"
-                        placeholder="your phone number">
+                    <input type="tel" class="form-control " name="phone" id="phone"
+                        placeholder="Tel - 09668921869" value="{{ old('phone') }}" pattern="[0-9]{9,15}" required>
+
+                    {{-- <div class="form-group"> --}}
+                    {{-- <input type="tel" value="" class="form-control" id="u_tel" name="phone"  placeholder="Tel"  required data-required-error="Kérjük, adja meg a telefonszámát"  minlength="8" maxlength="15">
+                                       <div class="help-block with-errors"></div> --}}
+                    {{-- </div> --}}
                 </div>
+
                 <div class="mt-4">
-                    <textarea class="form-control" name="message" rows="5" placeholder="your message" required></textarea>
+                    <textarea class="form-control @error('message') is-invalid @enderror" name="message" rows="5"
+                        placeholder="Message" required>{{ old('message') }}</textarea>
+
+                    @error('message')
+                        <div class="text-danger offset-xxl-2 offset-3">{{ $message }}</div>
+                    @enderror
                 </div>
+
+
                 <div class="text-center mt-4"><button class="btn btn-danger text white" type="submit">Send
                         Message</button></div>
             </form>
@@ -804,7 +815,7 @@
 <!-- End Contact Section -->
 
 <!-- Start Google Maps -->
-<div class="mb-3">
+<div class="mb-0">
     <iframe style="border:0; width: 100%; height: 350px;"
         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
         frameborder="0" allowfullscreen></iframe>

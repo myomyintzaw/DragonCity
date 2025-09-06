@@ -47,7 +47,7 @@
                             <div class="form-group mb-3">
                                 <input type="text" name="categoryName"
                                     class="form-control @error('categoryName') is-invalid @enderror"
-                                    placeholder="Category name" value="{{old('categoryName')}}">
+                                    placeholder="Category name" value="{{ old('categoryName') }}">
 
                                 @error('categoryName')
                                     <div class="text-danger">
@@ -60,7 +60,8 @@
 
                             <!-- Category Description form-floating -->
                             <div class=" mb-3 ">
-                                <textarea name="categoryDescription"  id="categoryDescription" class="form-control" style="height: auto" placeholder="Category description">{{old('categoryDescription')}}</textarea>
+                                <textarea name="categoryDescription" id="categoryDescription" class="form-control" style="height: auto"
+                                    placeholder="Category description">{{ old('categoryDescription') }}</textarea>
                                 {{-- <label for="categoryDescription">Description</label> --}}
                                 @error('categoryDescription')
                                     <div class="text-danger">
@@ -69,7 +70,7 @@
                                 @enderror
 
                             </div>
-                             <!--End Category Description -->
+                            <!--End Category Description -->
 
                             <!-- Button -->
                             <div class="text-center">
@@ -83,16 +84,6 @@
             </div>
 
         </div>
-
-
-
-
-
-
-
-
-
-
 
 
 
