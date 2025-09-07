@@ -139,7 +139,7 @@ class ProductController extends Controller
             'categoryId' => 'required',
             'productDescription' => 'required',
             'productPrice' => 'required',
-            'productImage' => 'required | image | mimes:jpeg,jpg,png',
+            'productImage' => 'required | image | mimes:jpeg,jpg,png,webp',
         ];
 
         Validator::make($request->all(), $rules)->validate();

@@ -182,15 +182,13 @@
                                     </div>
                                 @endif
                             @endforeach
-                        </div>
+                            {{-- {{ $productData->links() }} --}}
+
                     @endif
 
                 </div>
             </div>
-
             <!-- End Acer Products -->
-
-
 
 
             <!--======== Asus Products ========-->
@@ -223,7 +221,10 @@
                                 @endif
                             @endforeach
                         </div>
+                        {{-- {{ $productData->links() }} --}}
+
                     @endif
+
                 </div>
             </div>
             <!-- End Asus Products -->
@@ -242,7 +243,7 @@
                             <p>Best Selling Laptop</p>
                             <h3>Dell</h3>
                         </div>
-                        <!-- ===== List of Asus Products =====-->
+                        <!-- ===== List of Dell Products =====-->
                         <div class="row  gy-5 ">
 
                             @foreach ($productData as $product)
@@ -319,7 +320,7 @@
                             <p>Best Selling Laptop</p>
                             <h3>Msi</h3>
                         </div>
-                        <!-- ===== List of Lenovo Products =====-->
+                        <!-- ===== List of Msi Products =====-->
                         <div class="row  gy-5 ">
 
                             @foreach ($productData as $product)
@@ -341,7 +342,156 @@
                     @endif
                 </div>
             </div>
-            <!-- End MsiProducts -->
+            <!-- End Msi Products -->
+
+
+
+
+            <!--======== Microsoft Products ========-->
+            <div class="tab-content" data-aos="" data-aos-delay="300">
+                <div class="tab-pane fade" id="microsoft">
+
+                    <!-- =====Microsoft Brand ======= -->
+                    @if (isset($productData) && $productData->isNotEmpty())
+                        <div class="tab-header text-center">
+                            <p>Best Selling Laptop</p>
+                            <h3>Microsoft</h3>
+                        </div>
+                        <!-- ===== List of Microsoft Products =====-->
+                        <div class="row  gy-5 ">
+
+                            @foreach ($productData as $product)
+                                @if ($product->category_id == 6)
+                                    <div class="col-lg-4 menu-item">
+                                        <a href="{{ route('dragoncity.shop', $product->id) }}" class=""><img
+                                                src="{{ asset('storage/products/' . $product->image) }}"
+                                                class="menu-img img-fluid" alt="product image"></a>
+                                        <h4>{{ $product->name }}</h4>
+                                        <p class="ingredients">{{ $product->series }}</p>
+
+                                        <p class="price">
+                                            ${{ $product->price }}
+                                        </p>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <!-- End  Microsoft Products -->
+
+
+
+            <!--======== Toshiba Products ========-->
+            <div class="tab-content" data-aos="" data-aos-delay="300">
+                <div class="tab-pane fade" id="toshiba">
+
+                    <!-- =====Toshiba Brand ======= -->
+                    @if (isset($productData) && $productData->isNotEmpty())
+                        <div class="tab-header text-center">
+                            <p>Best Selling Laptop</p>
+                            <h3>Toshiba</h3>
+                        </div>
+                        <!-- ===== List of Toshiba Products =====-->
+                        <div class="row  gy-5 ">
+
+                            @foreach ($productData as $product)
+                                @if ($product->category_id == 7)
+                                    <div class="col-lg-4 menu-item">
+                                        <a href="{{ route('dragoncity.shop', $product->id) }}" class=""><img
+                                                src="{{ asset('storage/products/' . $product->image) }}"
+                                                class="menu-img img-fluid" alt="product image"></a>
+                                        <h4>{{ $product->name }}</h4>
+                                        <p class="ingredients">{{ $product->series }}</p>
+
+                                        <p class="price">
+                                            ${{ $product->price }}
+                                        </p>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <!-- End Toshiba Products -->
+
+
+                <!--======== Samsung Products ========-->
+            <div class="tab-content" data-aos="" data-aos-delay="300">
+                <div class="tab-pane fade" id="samsung">
+
+                    <!-- =====Samsung Brand ======= -->
+                    @if (isset($productData) && $productData->isNotEmpty())
+                        <div class="tab-header text-center">
+                            <p>Best Selling Laptop</p>
+                            <h3>Samsung</h3>
+                        </div>
+                        <!-- ===== List of Samsung Products =====-->
+                        <div class="row  gy-5 ">
+
+                            @foreach ($productData as $product)
+                                @if ($product->category_id == 8)
+                                    <div class="col-lg-4 menu-item">
+                                        <a href="{{ route('dragoncity.shop', $product->id) }}" class=""><img
+                                                src="{{ asset('storage/products/' . $product->image) }}"
+                                                class="menu-img img-fluid" alt="product image"></a>
+                                        <h4>{{ $product->name }}</h4>
+                                        <p class="ingredients">{{ $product->series }}</p>
+
+                                        <p class="price">
+                                            ${{ $product->price }}
+                                        </p>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <!-- End Samsung Products -->
+
+
+
+       <!--======== Apple Products ========-->
+            <div class="tab-content" data-aos="" data-aos-delay="300">
+                <div class="tab-pane fade" id="apple">
+
+                    <!-- =====Apple Brand ======= -->
+                    @if (isset($productData) && $productData->isNotEmpty())
+                        <div class="tab-header text-center">
+                            <p>Best Selling Laptop</p>
+                            <h3>Apple</h3>
+                        </div>
+                        <!-- ===== List of Apple Products =====-->
+                        <div class="row  gy-5 ">
+
+                            @foreach ($productData as $product)
+                                @if ($product->category_id == 9)
+                                    <div class="col-lg-4 menu-item">
+                                        <a href="{{ route('dragoncity.shop', $product->id) }}" class=""><img
+                                                src="{{ asset('storage/products/' . $product->image) }}"
+                                                class="menu-img img-fluid" alt="product image"></a>
+                                        <h4>{{ $product->name }}</h4>
+                                        <p class="ingredients">{{ $product->series }}</p>
+
+                                        <p class="price">
+                                            ${{ $product->price }}
+                                        </p>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <!-- End Apple Products -->
+
+
+            {{-- {{ $productData->links() }} --}}
+        </div>
+
 
     </section>
     <!-- End Product Section -->

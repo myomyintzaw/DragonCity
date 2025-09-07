@@ -60,7 +60,7 @@
 
                             <!-- Category Description form-floating -->
                             <div class=" mb-3 ">
-                                <textarea name="categoryDescription" id="categoryDescription" class="form-control" style="height: auto"
+                                <textarea name="categoryDescription" id="categoryDescription" rows="4" class="form-control" style="height: auto"
                                     placeholder="Category description">{{ old('categoryDescription') }}</textarea>
                                 {{-- <label for="categoryDescription">Description</label> --}}
                                 @error('categoryDescription')

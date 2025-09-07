@@ -96,7 +96,7 @@
                             <div class="form-group mb-4">
                                 <label for="productDescription" class="form-label">Description</label>
                                 <textarea name="productDescription" id="productDescription"
-                                    class="form-control @error('productDescription') is-invalid @enderror" placeholder="Product description">{{ old('productDescription') }}</textarea>
+                                    class="form-control @error('productDescription') is-invalid @enderror" rows="5" placeholder="Product description">{{ old('productDescription') }}</textarea>
                                 @error('productDescription')
                                     <div class="text-danger">
                                         {{ $message }}

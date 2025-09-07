@@ -11,7 +11,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item action">Home</li>
                     <li class="breadcrumb-item action">Product</li>
-                    <li class="breadcrumb-item action">Product List</li>
+                    <li class="breadcrumb-item action"><a href="{{ route('product.list') }}"> Product List</a> </li>
                     <li class="breadcrumb-item action">Product Detail</li>
                 </ol>
             </nav>
@@ -45,7 +45,11 @@
 
             {{-- <img src="..." class="card-img-top" alt="..."> --}}
             <div class="card-body">
-                <h5 class="card-title text-center"><i class="fa-solid fa-laptop me-2"></i>{{ $data->name }}</h5>
+                <h5 class="card-title text-center">
+                    {{-- <i class="fa-solid fa-laptop me-2"></i> --}}
+                    <i class="fa-brands fa-product-hunt me-2"></i>
+                    {{ $data->name }}
+                </h5>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><i class="fa-solid fa-tags text-secondary me-2"></i>{{ $data->series }}</li>

@@ -59,10 +59,12 @@
                                 </td>
                                 <td class="col-lg-1">
                                     <a href="{{ route('product.detail', $product->id) }}"><button
-                                            class="btn btn-outline-info" title="detail product"><i
-                                                class="fa-solid fa-circle-info"></i></button></a>
-                                </td>
+                                            class="btn btn-outline-info" title="detail product">
+                                            <i class="fa-solid fa-circle-info"></i>
+                                            {{-- <i class="fa-solid fa-info"></i> --}}
+                                        </button></a>
 
+                                </td>
                                 <td class="col-lg-1"><a href="{{ route('product.detail', $product->id) }}" title="detail"
                                         class="  fw-bolder btn-link ">
                                         <h5>{{ $product->id }}</h5>

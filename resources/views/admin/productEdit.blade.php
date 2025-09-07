@@ -11,7 +11,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item action">Home</li>
                     <li class="breadcrumb-item action">Product</li>
-                    <li class="breadcrumb-item action">Product List</li>
+                    <li class="breadcrumb-item action"><a href="{{route('product.list')}}">Product List</a></li>
                     <li class="breadcrumb-item action">Product Edit</li>
                 </ol>
             </nav>
