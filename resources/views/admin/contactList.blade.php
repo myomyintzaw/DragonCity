@@ -29,6 +29,7 @@
             @endif
         </div>
 
+
         {{-- {{dd(count($data))}} --}}
         @if (count($data) == 0)
             <h4 class="text-center mt-4 font-bold">There is no <span class="text-danger">Contact Data!</span></h4>

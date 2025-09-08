@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use LengthException;
 
 class CartController extends Controller
 {
@@ -15,13 +16,13 @@ class CartController extends Controller
         // logger($request->all());
         // logger($request);
 
+        $status=true;
+
         $productData = Cart::where('product_id', $request->product_id)->first();
 
         if ($productData != null && $productData->user_id == $request->user_id) {
 
-            $productData = $productData->qty + $request->qty;
-
-            Cart::where('user_id', $request->user_id)->update($productData);
+             return response(304);
         } else {
 
             $data = [

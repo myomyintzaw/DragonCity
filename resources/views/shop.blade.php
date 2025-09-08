@@ -14,9 +14,20 @@
 @section('content')
     {{-- {{dd($productData->toArray())}} --}}
 
+    <!-- Contact Create Success Message -->
+    {{-- <div class="col-lg-6 offset-lg-3">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-square-check me-2"></i> <strong>{{ session('success') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div> --}}
+
     <!-- shop -->
-    <div class="container px-5" style="margin-top: 150px; margin-bottom:150px;">
-        <div class="row justify-content-center">
+    <div class="container px-5" style="margin-top: 150px; margin-bottom:150px;" >
+        <div class="row justify-content-center" >
+            <div id="mes"></div>
             <!-- image -->
             <div class="col-lg-4">
                 <div class="section-title text-center">
@@ -134,8 +145,21 @@
                     },
                     dataType: 'json',
                     success: function(response) {
-                        window.location.href = "http://127.0.0.1:8000/";
-                        // window.location.href = "http://localhost:8000/";
+                        if (response == 304) {
+                                // alert("Hello");
+                                 $('#info').remove();
+
+                             $('#mes').after(`
+                           <div class="text-center text-danger p-4" id="info" role="alert" style="margin-top:0px;">
+                            <h1 class="animate__animated animate__bounce animate__zoomInDown"><u>This Item already choose!.</u></h1>
+
+                        </div>
+                        `);
+
+                        } else {
+                            window.location.href = "http://127.0.0.1:8000/";
+                            // window.location.href = "http://localhost:8000/";
+                        }
                     }
 
 
