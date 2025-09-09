@@ -336,8 +336,12 @@
     <!-- End Sidebar-->
 
 
+    
+
 
     @yield('content');
+
+
 
 
 

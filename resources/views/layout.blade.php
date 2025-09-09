@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 
     <!--Animation css -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -42,7 +42,7 @@
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script src="{{ asset('user/js/main.js') }}"></script>
     <script src="{{ asset('user/js/jquery-3.7.1.js') }}"></script>
-    <script src="{{asset('user/js/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{ asset('user/js/jquery-3.7.1.min.js') }}"></script>
 </head>
 
 <body>
@@ -70,8 +70,10 @@
                             @if (!Auth::user())
                                 <li><a href="{{ route('login') }}">Login <i
                                             class="fa-solid fa-right-to-bracket"></i></a></li>
-                                <li><a href="{{ route('register') }}">Register <i
-                                            class="fa-solid fa-user-plus"></i></a>
+
+                                <li><a href="{{ route('register') }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        Register <i class=""></i></a>
+                                    {{-- {{ route('register') }}  fa-solid fa-user-plus --}}
                                 </li>
                             @else
                                 <li><a href="{{ route('profile') }}">Account Profile <i
@@ -92,6 +94,7 @@
             </nav>
             <!-- .navbar  end -->
 
+
             @if (Auth::user())
                 @if (Auth::user()->role == 'admin')
                     <a class="btn-book-a-table" href="{{ route('admin.dashboard') }}"><i
@@ -109,6 +112,155 @@
     </header>
     <!-- End Header -->
 
+
+
+
+    <!-- Register Modal -->
+
+    <div class="modal modal-dialog modal-lg fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-transparent ">
+                <form action="{{ route('register') }}" method="post">
+                        @csrf
+                <button type="button" class="btn-close offset-lg-11 mt-4" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                <div class="modal-header justify-content-center">
+                    <img class="inline-block d-flex flex-col" src="{{ asset('images/logo.png') }}" alt="logo" width="80"
+                    height="80">
+
+                    <h1 class="text-success fw-bold fs-5 mt-2">Account Registration</h1>
+                </div>
+                <div class="modal-body text-pretty text-white">
+
+                        <div class="row p-3 ">
+                            <div class="col-6">
+
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror "
+                                        name="name" id="name" placeholder="Name"
+                                        value="{{ old('name') }}">
+                                    @error('name')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                        name="email" id="email" placeholder="Email"
+                                        value="{{ old('email') }}">
+                                    @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        id="password" placeholder="Password">
+                                    @error('password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+
+                                <div class="mb-0">
+                                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" name="password_confirmation"
+                                        id="password_confirmation" placeholder="Confirm Password">
+                                </div>
+
+
+
+
+                            </div> <!--End col-6-->
+
+                            <div class="col-6">
+
+                                <div class="mb-3">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control @error('age') is-invalid @enderror"
+                                        name="age" id="age" placeholder="Age"
+                                        value="{{ old('age') }}">
+                                    @error('age')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+
+                                <div class="form-check form-check-inline mt-4 ">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1"
+                                        value="male">
+                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"
+                                        value="female">
+                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                </div>
+
+                                <div class="mb-3 mt-3">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="tel" class="form-control @error('phone') is-invalid @enderror"
+                                        name="phone" id="phone" placeholder="Tel - 09689491869"
+                                        value="{{ old('phone') }}" pattern="[0-9]{9,15}" required>
+                                    @error('phone')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div><!--col-6-->
+
+                        </div><!--row-->
+
+
+
+
+
+                        @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                            <div class="mt-4">
+                                <x-label for="terms">
+                                    <div class="flex items-center">
+                                        <x-checkbox name="terms" id="terms" required />
+
+                                        <div class="ms-2">
+                                            {!! __('I agree to the :terms_of_service and :privacy_policy', [
+                                                'terms_of_service' =>
+                                                    '<a target="_blank" href="' .
+                                                    route('terms.show') .
+                                                    '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
+                                                    __('Terms of Service') .
+                                                    '</a>',
+                                                'privacy_policy' =>
+                                                    '<a target="_blank" href="' .
+                                                    route('policy.show') .
+                                                    '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
+                                                    __('Privacy Policy') .
+                                                    '</a>',
+                                            ]) !!}
+                                        </div>
+                                    </div>
+                                </x-label>
+                            </div>
+                        @endif
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                    <input type="submit" class="btn btn-danger px-3" value="register">
+
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Register Modal -->
 
 
 

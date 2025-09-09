@@ -25,8 +25,6 @@ use Laravel\Jetstream\Rules\Role;
 
 
 
-
-
 // DragonCity Welcome URL
 Route::get('/', [DragoncityController::class, 'home'])->name('dragoncity.home');
 

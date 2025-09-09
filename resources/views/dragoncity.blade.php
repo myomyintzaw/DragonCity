@@ -2,6 +2,8 @@
 
 @section('title', 'Royal Dragon')
 
+
+
 @section('content')
     <!---Success message---->
     <div class="text-center mx-2" style="margin-top: 90px;">
