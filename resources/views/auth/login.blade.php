@@ -40,9 +40,7 @@
                             <label for="email" class="form-label">Email:</label>
                             <input type="text" class="form-control @error('email') is-invalid @enderror"
                                 name="email" id="email" placeholder="Email" value="{{ old('email') }}">
-                            @error('email')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+
                         </div>
 
 
@@ -50,9 +48,7 @@
                             <label for="password" class="form-label">Password:</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror"
                                 name="password" id="password" placeholder="Password">
-                            @error('password')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+
                         </div>
 
 
@@ -78,6 +74,50 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Log in Model -->
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop-login">
+        Launch static backdrop modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop-login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Log in -->
+
+
+
+
+
+
 
 </body>
 <script src="/bootstrap-5.3.7-dist/js/bootstrap.js"></script>

@@ -10,6 +10,23 @@
     <!-- CSRF Token for AJAX requests -->
     @yield('meta')
 
+    <style>
+        #togglePas {
+            float: right;
+            margin: -30px 0px 0px -25px;
+            right: 10px;
+            position: relative;
+            z-index: 2;
+            color: #333333;
+        }
+    </style>
+
+
+    <!-- Bootstrap CSS & Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css">
+
+
     {{-- Favicon --}}
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 
@@ -68,12 +85,14 @@
                         <ul>
 
                             @if (!Auth::user())
-                                <li><a href="{{ route('login') }}">Login <i
+                                <li><a href="{{ route('login') }}" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop-login">Login <i
                                             class="fa-solid fa-right-to-bracket"></i></a></li>
 
-                                <li><a href="{{ route('register') }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                        Register <i class=""></i></a>
-                                    {{-- {{ route('register') }}  fa-solid fa-user-plus --}}
+                                <li><a href="{{ route('register') }}" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop">
+                                        Register <i class="fa-solid fa-user-plus"></i></a>
+                                    {{-- {{ route('register') }}   --}}
                                 </li>
                             @else
                                 <li><a href="{{ route('profile') }}">Account Profile <i
@@ -114,28 +133,26 @@
 
 
 
-
     <!-- Register Modal -->
 
-    <div class="modal modal-dialog modal-lg fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal  modal-lg fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content bg-transparent ">
+            <div class="modal-content bg-transparent  ">
                 <form action="{{ route('register') }}" method="post">
-                        @csrf
-                <button type="button" class="btn-close offset-lg-11 mt-4" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-                <div class="modal-header justify-content-center">
-                    <img class="inline-block d-flex flex-col" src="{{ asset('images/logo.png') }}" alt="logo" width="80"
-                    height="80">
+                    @csrf
+                    <button type="button" class="btn-close offset-lg-11 mt-4" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    <div class="modal-header justify-content-center">
+                        <img class="inline-block d-flex flex-col" src="{{ asset('images/logo.png') }}" alt="logo"
+                            width="80" height="80">
 
-                    <h1 class="text-success fw-bold fs-5 mt-2">Account Registration</h1>
-                </div>
-                <div class="modal-body text-pretty text-white">
+                        <h1 class="text-success fw-bold fs-5 mt-2">Account Registration</h1>
+                    </div>
+                    <div class="modal-body text-pretty text-white">
 
-                        <div class="row p-3 ">
+                        <div class="row p-2 ">
                             <div class="col-6">
-
 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
@@ -157,27 +174,49 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        id="password" placeholder="Password">
+                                        id="pas" placeholder="Password">
                                     @error('password')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
 
-
                                 <div class="mb-0">
                                     <label for="password_confirmation" class="form-label">Confirm Password</label>
                                     <input type="password" class="form-control" name="password_confirmation"
                                         id="password_confirmation" placeholder="Confirm Password">
+                                </div> --}}
+
+
+                                <!-- Password -->
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="password"
+                                            placeholder="Enter password">
+                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                            <i class="bi bi-eye" id="eyeIconPassword"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
+                                <!-- Confirm Password -->
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="confirmPassword"
+                                            placeholder="Confirm password">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            id="toggleConfirmPassword">
+                                            <i class="bi bi-eye" id="eyeIconConfirm"></i>
+                                        </button>
+                                    </div>
+                                </div>
 
-
-
-                            </div> <!--End col-6-->
+                            </div> <!--End first col-6-->
 
                             <div class="col-6">
 
@@ -192,7 +231,7 @@
                                 </div>
 
 
-                                <div class="form-check form-check-inline mt-4 ">
+                                <div class="form-check form-check-inline mt-5 ">
                                     <input class="form-check-input" type="radio" name="gender" id="inlineRadio1"
                                         value="male">
                                     <label class="form-check-label" for="inlineRadio1">Male</label>
@@ -217,50 +256,79 @@
 
                         </div><!--row-->
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                        <input type="submit" class="btn btn-danger px-3" value="Register">
 
-
-
-
-                        @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                            <div class="mt-4">
-                                <x-label for="terms">
-                                    <div class="flex items-center">
-                                        <x-checkbox name="terms" id="terms" required />
-
-                                        <div class="ms-2">
-                                            {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                                'terms_of_service' =>
-                                                    '<a target="_blank" href="' .
-                                                    route('terms.show') .
-                                                    '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
-                                                    __('Terms of Service') .
-                                                    '</a>',
-                                                'privacy_policy' =>
-                                                    '<a target="_blank" href="' .
-                                                    route('policy.show') .
-                                                    '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
-                                                    __('Privacy Policy') .
-                                                    '</a>',
-                                            ]) !!}
-                                        </div>
-                                    </div>
-                                </x-label>
-                            </div>
-                        @endif
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-                    <input type="submit" class="btn btn-danger px-3" value="register">
-
-                </div>
+                    </div>
                 </form>
             </div>
         </div>
+
     </div>
 
     <!-- End Register Modal -->
+
+
+
+    <!-- Log in Model -->
+    <div class="modal fade " id="staticBackdrop-login" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-transparent"
+                style="background-color: #333333;
+  box-shadow: 0 4px 12px rgba(49, 42, 42, 0.15);">
+                <button type="button" class="btn-close btn-close-white offset-11 mt-3" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                <div class="modal-header justify-content-center">
+                    <img class="inline-block" src="{{ asset('images/logo.png') }}" alt="logo" width="60"
+                        height="80">
+                    <h1 class="modal-title fs-5 fw-bolder text-primary" id="staticBackdropLabel">Account Login</h1>
+                </div>
+                <form action="{{ route('login') }}" method="post">
+                    @csrf
+                    <div class="modal-body p-4 text-white">
+
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                name="email" id="email" placeholder="Email" value="{{ old('email') }}">
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+
+
+                        <p><label for="">Password</label>
+                            <input type="password" name="password" placeholder="Password" id="pas"
+                                class="form-control pas ">
+                            <i class="bi-eye" id="togglePas"></i>
+
+                        </p>
+
+
+                    </div>
+                    <div class="modal-footer mt-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+                        <input type="submit" class="btn btn-danger px-3" value="Login">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- End Log in -->
+
 
 
 
@@ -343,16 +411,8 @@
                 Designed by <strong><span>UNity</span></strong>
             </div>
         </div>
-
     </footer><!-- End Footer -->
     <!-- End Footer -->
-
-
-
-
-
-
-
 
 
 
@@ -364,6 +424,7 @@
 
     <!-- Preloader -->
     <div id="preloader"></div>
+
 
 
 
@@ -405,6 +466,64 @@
 
 @yield('qtyjscode')
 {{-- @yield('cartjscod') --}}
+
+
+
+
+
+
+
+  <script>
+  $(document).ready(function() {
+      $('#togglePas').ready(function() {
+            // const togglePassword = document.querySelector('#togglePas');
+            const togglePassword = document.getElementById('togglePas');
+
+            const password = document.querySelector('.pas');
+            togglePassword.addEventListener('click', (e) => {
+
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                console.log(type);
+                let ps = password.setAttribute('type', type);
+                // ps= $('#password').val(ps);
+                console.log(ps);
+
+                e.target.classList.toggle("bi-eye");
+                e.target.classList.toggle('bi-eye-slash');
+            })
+        });
+
+            // Password toggle
+            const password = document.getElementById("password");
+            const togglePassword = document.getElementById("togglePassword");
+            const eyeIconPassword = document.getElementById("eyeIconPassword");
+
+            togglePassword.addEventListener("click", () => {
+                const type = password.type === "password" ? "text" : "password";
+                password.type = type;
+                eyeIconPassword.classList.toggle("bi-eye");
+                eyeIconPassword.classList.toggle("bi-eye-slash");
+            });
+
+            // Confirm Password toggle
+            const confirmPassword = document.getElementById("confirmPassword");
+            const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+            const eyeIconConfirm = document.getElementById("eyeIconConfirm");
+
+            toggleConfirmPassword.addEventListener("click", () => {
+                const type = confirmPassword.type === "password" ? "text" : "password";
+                confirmPassword.type = type;
+                eyeIconConfirm.classList.toggle("bi-eye");
+                eyeIconConfirm.classList.toggle("bi-eye-slash");
+            });
+
+        });
+        </script>
+
+
+
+
+
 
 
 
