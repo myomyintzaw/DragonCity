@@ -12,7 +12,8 @@ class AdminController extends Controller
     //Dashboard
     public function dashboard()
     {
-        return view('admin.admin-dashboard');
+        $dashboard=0;
+        return view('admin.admin-dashboard',compact('dashboard'));
     }
 
     //User Account List

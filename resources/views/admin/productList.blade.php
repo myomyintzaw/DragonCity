@@ -31,8 +31,18 @@
 
         {{-- {{dd(count($data))}} --}}
         @if (count($data) == 0)
-            <h4 class="text-center mt-4 font-bold">There is no <span class="text-danger">Product Data!</span></h4>
+            <h4 class="text-center animate__animated animate__bounce animate__flip mt-4 font-bold">There is no <span class="text-danger">Product Data!</span></h4>
         @else
+          <!--Search Bar-->
+            <form action="{{ route('product.search') }}" method="GET"
+                class="form-inline my-2 my-lg-0 col-11 col-sm-4 com-md-4 col-lg-5 col-xl-5 col-xxl-4 d-lg-flex  ">
+                <input class="form-control mr-sm-2 me-2" name="search" type="search" id="search"
+                    value="{{ isset($search) ? $search : '' }}" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 mt-2 mt-sm-2 mt-md-2 mt-lg-0 " type="submit"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <!-- End Search Bar -->
+
             <!--product List -->
             <div class="container-fluid mt-5">
                 <table class="table table-responsive table-hover align-middle ">
@@ -88,7 +98,9 @@
 
                 </table>
                 <div class="mt-5">
-                    {{ $data->links() }}
+                    {{-- {{ $data->links() }} --}}
+                    {{ $data->appends(['search' => request('search')])->links() }}
+                     {{-- {{ $data->appends(request()->query())->links() }} --}}
                 </div>
             </div>
         @endif

@@ -231,6 +231,21 @@
 
 
 
+                                {{-- <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        id="pas" placeholder="Password">
+                                    @error('password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-0">
+                                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" name="password_confirmation"
+                                        id="password_confirmation" placeholder="Confirm Password">
+                                </div> --}}
 
 
 {{-- <x-guest-layout>

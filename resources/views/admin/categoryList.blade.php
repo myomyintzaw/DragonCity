@@ -9,7 +9,7 @@
     <main id="main" class="main">
         <!-- Page Title -->
         <div class="pagetitle">
-            <h1>Category List - {{ $data->total() }}</h1>
+            <h1>Category List - {{ $cdata->total() }}</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item action">Hame</li>
@@ -30,9 +30,21 @@
         </div>
 
         {{-- {{dd(count($data))}} --}}
-        @if (count($data) == 0)
-            <h4 class="text-center mt-4 font-bold">There is no <span class="text-danger">Category Data!</span></h4>
+        @if (count($cdata) == 0)
+          <h4 class="text-center animate__animated animate__bounce animate__flip mt-4 fw-bold font-bold">There is no <span class="text-danger">Category Data!</span></h4>
         @else
+            <!--Search Bar-->
+            <form action="{{ route('list.search') }}" method="GET"
+                class="form-inline my-2 my-lg-0 col-11 col-sm-4 com-md-4 col-lg-5 col-xl-5 col-xxl-4 d-lg-flex  ">
+                <input class="form-control mr-sm-2 me-2" name="search" type="search" id="search"
+                    value="{{ isset($search) ? $search : '' }}" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 mt-2 mt-sm-2 mt-md-2 mt-lg-0 " type="submit"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <!-- End Search Bar -->
+
+
+
             <!--Category List -->
             <div class="container-fluid mt-5">
                 <table class="table table-responsive ">
@@ -48,7 +60,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($data as $category)
+                        @foreach ($cdata as $category)
                             <tr>
                                 <td class="col-lg-1 text-center">
                                     <a href="{{ route('category.edit', $category->id) }}">
@@ -62,9 +74,9 @@
                                 <td class="col-lg-1">{{ $category->created_at->format('j / F / Y') }}</td>
 
                                 <td class="col-lg-1 text-center">
-                                    <a href="{{route('category.delete',$category->id)}}">
-                                        <button class="btn btn-danger" title="delete category"><i
-                                                class="fa-solid fa-trash"></i></button></a>
+                                    <a href="{{ route('category.delete', $category->id) }}">
+                                        <button class="btn btn-danger" title="delete category">
+                                            <i class="fa-solid fa-trash"></i></button></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -73,7 +85,7 @@
 
                 </table>
                 <div class="mt-5">
-                    {{ $data->links() }}
+                    {{ $cdata->appends(request()->query())->links() }}
                 </div>
             </div>
         @endif

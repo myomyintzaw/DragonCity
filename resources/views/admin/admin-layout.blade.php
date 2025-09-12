@@ -23,6 +23,8 @@
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!--Animation css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <!-- Vendor CSS Files -->
     <link href="{{ asset('admin/vendor/bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
@@ -51,14 +53,18 @@
         </div>
         <!-- End Logo -->
 
-        <!--Search Bar-->
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div>
-        <!-- End Search Bar -->
+        {{-- {{ dd(session('dashboard')) }} --}}
+        @isset($dashboard)
+            <!--Search Bar-->
+            <div class="search-bar">
+                <form class="search-form d-flex align-items-center" method="POST" action="#">
+                    <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                </form>
+            </div>
+            <!-- End Search Bar -->
+        @endisset
+
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -68,6 +74,8 @@
                         <i class="bi bi-search"></i>
                     </a>
                 </li><!-- End Search Icon-->
+
+
 
                 <li class="nav-item dropdown">
                     <!--  Notification Icon -->
@@ -336,7 +344,7 @@
     <!-- End Sidebar-->
 
 
-    
+
 
 
     @yield('content');

@@ -29,8 +29,9 @@
                 <li class="list-group-item">
                     <i class="fa-solid fa-barcode me-2"></i>{{ $data2->order_number }}
                 </li>
-                <li class="list-group-item"><i
-                        class="fa-solid fa-circle-dollar-to-slot me-2"></i></i>{{ $data2->total_amount }} (Tax Inc.)
+                <li class="list-group-item">
+                <i class="fa-solid fa-hand-holding-dollar fa-lg me-1"></i>
+                    {{ $data2->total_amount }} (Tax Inc.)
                 </li>
                 {{-- <li class="list-group-item">
                         <i class="fa-solid fa-gem me-2"></i>{{ $data2->total }} Total
@@ -76,12 +77,15 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <i class="fa-solid fa-hand-holding-dollar  me-2"></i>{{ $orderDetail->product_price }}
+                        <i class="fa-solid fa-comment-dollar fa-lg me-2"></i>
+                        {{ $orderDetail->product_price }}
                     </li>
                     <li class="list-group-item"><i class="fa-solid fa-cubes-stacked  me-2"></i>{{ $orderDetail->qty }}
                         Quantity</li>
                     <li class="list-group-item">
-                        <i class="fa-solid fa-gem me-2"></i>{{ $orderDetail->total }} Total
+                        {{-- <i class="fa-solid fa-gem me-2"></i> --}}
+                        <i class="fa-solid fa-sack-dollar me-2"></i>
+                        {{ $orderDetail->total }} Total
                     </li>
 
                     <li class="list-group-item"><i

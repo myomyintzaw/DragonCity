@@ -32,16 +32,35 @@ class CategoryController extends Controller
     //Category List
     public function list()
     {
-        $data = Category::paginate(3);
-        return view('admin.categoryList', compact('data'));
+        $cdata = Category::paginate(6);
+        return view('admin.categoryList', compact('cdata'));
     }
+
+    //category List Search
+    public function search(Request $request)
+    {
+        // dd($request->toArray());
+        $search = $request->search;
+        $cdata = Category::where(function ($query) use ($search) {
+            $query->where('id', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%")
+                ->orWhere('description', 'like', "%$search%");
+        })->paginate(6);
+        return view('admin.categoryList', compact('cdata','search'));
+    }
+
+
+
 
     //Category Edit
     public function edit($id)
     {
-        $data = Category::where('id', $id)->first();
-        return view('admin.categoryEdit', compact('data'));
+        $cdata = Category::where('id', $id)->first();
+        return view('admin.categoryEdit', compact('cdata'));
     }
+
+
+
 
     //Category Update
     public function update($id, Request $request)

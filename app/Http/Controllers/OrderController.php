@@ -55,12 +55,38 @@ class OrderController extends Controller
         return view('admin.orderList', compact('data'));
     }
 
+
+    //Order List Search
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $data = Order::leftJoin('users', 'orders.user_id', 'users.id')
+            ->select('orders.*', 'users.name as user_name')
+            ->where(function ($query) use ($search) {
+                $query->where('orders.id', 'like', "%$search%")
+                    ->orWhere('orders.order_number', 'like', "%$search%")
+                    ->orWhere('orders.total_amount', 'like', "%$search%")
+                    ->orWhere('users.name', 'like', "%{$search}%");
+            })->paginate(6);
+
+        return view('admin.orderList', compact('data', 'search'));
+    }
+
+
+
     //Order Deliver
     public function orderDeliver($number)
     {
         Order::where('order_number', $number)->update(['order_delivered' => 1]);
         return back()->with(['success' => 'Order is delivered']);
     }
+
+    //Order Call Back Deliver
+    public function orderDeliverBack($number){
+         Order::where('order_number', $number)->update(['order_delivered' => 0]);
+        return back()->with(['success' => 'Call Back Order!']);
+    }
+
 
 
     //Order Delete

@@ -35,7 +35,7 @@ Route::get('/shop/{id}', [DragoncityController::class, 'shop'])->name('dragoncit
 Route::get('/dashboard', [DragoncityController::class, 'home'])->name('dragoncity.home');
 
 
-Route::post('/contact',[ContactController::class,'contact'])->name('contact');
+Route::post('/contact', [ContactController::class, 'contact'])->name('contact');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::middleware(['prevent-back-history'])->group(function () {
@@ -58,6 +58,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
             Route::post('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
             Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+            // for search button
+            Route::get('/list/search/', [CategoryController::class, 'search'])->name(('list.search'));
         });
 
         //Product URLs
@@ -69,14 +71,19 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
             Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
             Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+            // for search button
+            Route::get('/list/search/', [ProductController::class, 'search'])->name(('product.search'));
         });
 
         //Order URLs
         Route::prefix('admin/order')->group(function () {
             Route::get('/list', [OrderController::class, 'orderList'])->name('order.list');
             Route::get('/deliver/{number}', [OrderController::class, 'orderDeliver'])->name('order.deliver');
+            Route::get('/back/deliver/{number}', [OrderController::class, 'orderDeliverBack'])->name('deliver.back');
             Route::get('/detail/{number}', [OrderDetailController::class, 'orderDetail'])->name('order.detail');
             Route::get('/delete/{number}', [OrderController::class, 'orderDelete'])->name('order.delete');
+            // for search button
+            Route::get('/list/search/', [OrderController::class, 'search'])->name(('order.search'));
         });
 
 
@@ -98,12 +105,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         });
 
         //Contact URLs
-        Route::prefix('admin/contact')->group(function(){
-            Route::get('/list',[ContactController::class,'list'])->name('contact.list');
-            Route::get('/detail/{id}',[ContactController::class,'detail'])->name('contact.detail');
-            Route::get('/delete/{id}',[ContactController::class,'delete'])->name('contact.delete');
+        Route::prefix('admin/contact')->group(function () {
+            Route::get('/list', [ContactController::class, 'list'])->name('contact.list');
+            Route::get('/detail/{id}', [ContactController::class, 'detail'])->name('contact.detail');
+            Route::get('/delete/{id}', [ContactController::class, 'delete'])->name('contact.delete');
         });
-
     });
 
 

@@ -48,6 +48,31 @@ class ProductController extends Controller
         return view('admin.productList', compact('data'));
     }
 
+    //Product List Search
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        // User::leftJoin('posts', 'users.id', '=', 'posts.user_id')
+        //     ->select('users.*', 'posts.title')
+        //     ->where('users.name', 'like', '%john%')
+        //     ->get();
+
+
+        $data = Product::leftJoin('categories', 'products.category_id', 'categories.id')
+            ->select('products.*', 'categories.name as category_name')
+            // ->where('products.name', 'like', "%$search%")
+            ->where(function ($query) use ($search) {
+                $query->where('products.id', 'like', "%$search%")
+                    ->orWhere('products.name', 'like', "%$search%")
+                    ->orWhere('products.series', 'like', "%$search%")
+                    ->orWhere('products.description', 'like', "%$search%")
+                    ->orWhere('products.price', 'like', "%$search%")
+                    ->orWhere('categories.name', 'like', "%{$search}%");
+            })->paginate(5);
+
+        return view('admin.productList', compact('data', 'search'));
+    }
+
     //Product Detail
     public function detail($id)
     {
@@ -100,17 +125,18 @@ class ProductController extends Controller
 
 
     //Product Delete
-    public function delete($id){
+    public function delete($id)
+    {
 
-         $dbImage = Product::where('id', $id)->value('image');
-           //Delete old image from storage files
-            if ($dbImage != null) {
-                Storage::delete('public/products/' . $dbImage);
-                // dd('public/products/' . $dbImage);
-            }
+        $dbImage = Product::where('id', $id)->value('image');
+        //Delete old image from storage files
+        if ($dbImage != null) {
+            Storage::delete('public/products/' . $dbImage);
+            // dd('public/products/' . $dbImage);
+        }
 
-        Product::where('id',$id)->delete();
-        return back()->with(['success'=>'product delete success']);
+        Product::where('id', $id)->delete();
+        return back()->with(['success' => 'product delete success']);
     }
 
 

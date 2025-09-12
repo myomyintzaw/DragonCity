@@ -30,14 +30,14 @@
                         <hr>
 
                         <!-- Category Form-->
-                        <form action="{{route('category.update',$data->id)}}" method="post">
+                        <form action="{{route('category.update',$cdata->id)}}" method="post">
                             @csrf
 
                             <!-- Category Name -->
                             <div class="form-group mb-3">
                                 <input type="text" name="categoryName"
                                     class="form-control @error('categoryName') is-invalid @enderror"
-                                    value="{{old('categoryName',$data->name)}}">
+                                    value="{{old('categoryName',$cdata->name)}}">
 
                                 @error('categoryName')
                                     <div class="text-danger">
@@ -49,7 +49,7 @@
 
                             <!-- Category Description form-floating-->
                             <div class=" mb-4 form-group ">
-                                <textarea name="categoryDescription"  id="categoryDescription" cols="30" rows="3" class="form-control @error('categoryDescription') is-invalid @enderror">{{old('categoryDescription', $data->description)}}</textarea>
+                                <textarea name="categoryDescription"  id="categoryDescription" cols="30" rows="3" class="form-control @error('categoryDescription') is-invalid @enderror">{{old('categoryDescription', $cdata->description)}}</textarea>
                                 {{-- <label for="categoryDescription">Description</label> --}}
                                 @error('categoryDescription')
                                     <div class="text-danger">

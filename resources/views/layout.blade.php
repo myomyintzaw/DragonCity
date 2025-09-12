@@ -92,7 +92,7 @@
                                 <li><a href="{{ route('register') }}" data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop">
                                         Register <i class="fa-solid fa-user-plus"></i></a>
-                                    {{-- {{ route('register') }}   --}}
+                                    {{-- {{ route('register') }}  --}}
                                 </li>
                             @else
                                 <li><a href="{{ route('profile') }}">Account Profile <i
@@ -139,16 +139,17 @@
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content bg-transparent  ">
+
+                <button type="button" class="btn-close offset-lg-11 mt-4" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                <div class="modal-header justify-content-center">
+                    <img class="inline-block d-flex flex-col" src="{{ asset('images/logo.png') }}" alt="logo"
+                        width="80" height="80">
+                    <h1 class="text-success fw-bold fs-5 mt-2">Account Registration</h1>
+                </div>
+
                 <form action="{{ route('register') }}" method="post">
                     @csrf
-                    <button type="button" class="btn-close offset-lg-11 mt-4" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                    <div class="modal-header justify-content-center">
-                        <img class="inline-block d-flex flex-col" src="{{ asset('images/logo.png') }}" alt="logo"
-                            width="80" height="80">
-
-                        <h1 class="text-success fw-bold fs-5 mt-2">Account Registration</h1>
-                    </div>
                     <div class="modal-body text-pretty text-white">
 
                         <div class="row p-2 ">
@@ -174,28 +175,12 @@
                                     @enderror
                                 </div>
 
-                                {{-- <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        id="pas" placeholder="Password">
-                                    @error('password')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-0">
-                                    <label for="password_confirmation" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" name="password_confirmation"
-                                        id="password_confirmation" placeholder="Confirm Password">
-                                </div> --}}
-
 
                                 <!-- Password -->
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="password"
+                                        <input type="password" name="password" class="form-control" id="password"
                                             placeholder="Enter password">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                             <i class="bi bi-eye" id="eyeIconPassword"></i>
@@ -207,8 +192,8 @@
                                 <div class="mb-3">
                                     <label for="confirmPassword" class="form-label">Confirm Password</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="confirmPassword"
-                                            placeholder="Confirm password">
+                                        <input type="password" name="password_confirmation" class="form-control"
+                                            id="confirmPassword" placeholder="Confirm password">
                                         <button class="btn btn-outline-secondary" type="button"
                                             id="toggleConfirmPassword">
                                             <i class="bi bi-eye" id="eyeIconConfirm"></i>
@@ -322,10 +307,6 @@
         </div>
 
     </div>
-
-
-
-
 
     <!-- End Log in -->
 
@@ -473,9 +454,9 @@
 
 
 
-  <script>
-  $(document).ready(function() {
-      $('#togglePas').ready(function() {
+<script>
+    $(document).ready(function() {
+        $('#togglePas').ready(function() {
             // const togglePassword = document.querySelector('#togglePas');
             const togglePassword = document.getElementById('togglePas');
 
@@ -493,32 +474,32 @@
             })
         });
 
-            // Password toggle
-            const password = document.getElementById("password");
-            const togglePassword = document.getElementById("togglePassword");
-            const eyeIconPassword = document.getElementById("eyeIconPassword");
+        // Password toggle
+        const password = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+        const eyeIconPassword = document.getElementById("eyeIconPassword");
 
-            togglePassword.addEventListener("click", () => {
-                const type = password.type === "password" ? "text" : "password";
-                password.type = type;
-                eyeIconPassword.classList.toggle("bi-eye");
-                eyeIconPassword.classList.toggle("bi-eye-slash");
-            });
-
-            // Confirm Password toggle
-            const confirmPassword = document.getElementById("confirmPassword");
-            const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
-            const eyeIconConfirm = document.getElementById("eyeIconConfirm");
-
-            toggleConfirmPassword.addEventListener("click", () => {
-                const type = confirmPassword.type === "password" ? "text" : "password";
-                confirmPassword.type = type;
-                eyeIconConfirm.classList.toggle("bi-eye");
-                eyeIconConfirm.classList.toggle("bi-eye-slash");
-            });
-
+        togglePassword.addEventListener("click", () => {
+            const type = password.type === "password" ? "text" : "password";
+            password.type = type;
+            eyeIconPassword.classList.toggle("bi-eye");
+            eyeIconPassword.classList.toggle("bi-eye-slash");
         });
-        </script>
+
+        // Confirm Password toggle
+        const confirmPassword = document.getElementById("confirmPassword");
+        const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+        const eyeIconConfirm = document.getElementById("eyeIconConfirm");
+
+        toggleConfirmPassword.addEventListener("click", () => {
+            const type = confirmPassword.type === "password" ? "text" : "password";
+            confirmPassword.type = type;
+            eyeIconConfirm.classList.toggle("bi-eye");
+            eyeIconConfirm.classList.toggle("bi-eye-slash");
+        });
+
+    });
+</script>
 
 
 

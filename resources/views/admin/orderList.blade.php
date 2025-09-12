@@ -31,13 +31,27 @@
 
         {{-- {{dd(count($data))}} --}}
         @if (count($data) == 0)
-            <h4 class="text-center mt-4 font-bold">There is no <span class="text-danger">Order Data!</span></h4>
+            <h4 class="text-center mt-4 animate__animated animate__bounce animate__flip font-bold">There is no <span
+                    class="text-danger">Order Data!</span></h4>
         @else
+            <!--Search Bar-->
+            <form action="{{ route('order.search') }}" method="GET"
+                class="form-inline my-2 my-lg-0 col-11 col-sm-4 com-md-4 col-lg-5 col-xl-5 col-xxl-4 d-lg-flex  ">
+                <input class="form-control mr-sm-2 me-2" name="search" type="search" id="search"
+                    value="{{ isset($search) ? $search : '' }}" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 mt-2 mt-sm-2 mt-md-2 mt-lg-0 " type="submit"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <!-- End Search Bar -->
+
+
+
             <!--product List -->
             <div class="container-fluid mt-5">
                 <table class="table table-responsive table-hover align-middle">
                     <thead>
                         <tr>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th>Id</th>
@@ -64,7 +78,17 @@
                                         </a>
                                     @endif
                                     <!--End Check Delivery-->
-                                </td><td>
+                                </td>
+                                <td >
+                                    @if ($order->order_delivered != 0)
+                                        <a href="{{ route('deliver.back', $order->order_number) }}">
+                                            <button class="btn btn-sm my-2 me-2" title="delivery" style="background-color:rgb(241, 78, 33);">
+                                                <i class="fa-solid fa-rotate-left fa-lg text-white"></i></button>
+                                        </a>
+                                    @endif
+                                </td>
+
+                                <td>
                                     <a href="{{ route('order.detail', $order->order_number) }}"><button
                                             class="btn btn-sm fw-bolder " title="detail order">
                                             <h5>
@@ -72,8 +96,9 @@
                                                 {{-- <i class="fa-solid fa-asterisk"></i> --}}
                                                 {{-- <i class="fa-solid fa-asterisk fa-fade"></i> --}}
                                                 {{-- <i class="fa-solid fa-info fa-fade"></i> --}}
-                                            {{-- <i class="fa-sharp fa-solid fa-info"></i> --}}
-                                            <i class="fa-sharp fa-solid fa-info fa-xs"></i>
+                                                {{-- <i class="fa-sharp fa-solid fa-info"></i> --}}
+                                                {{-- <i class="fa-sharp fa-solid fa-info fa-xs"></i> --}}
+                                                <i class="fa-solid fa-circle-info text-info me-4"></i>
                                                 {{-- <i class="fa-light fa-asterisk"></i> --}}
                                                 {{-- <i class="fa-light fa-asterisk fa-fade"></i> --}}
                                                 {{-- <i class="fa-solid fa-asterisk fa-fade" style="color: #63E6BE;"></i> --}}
@@ -100,7 +125,9 @@
                                 </td>
 
                                 <td class="col-lg-2">
-                                    <i class="fa-solid fa-sack-dollar me-2"></i></i>{{ $order->total_amount }}
+                                    {{-- <i class="fa-solid fa-sack-dollar me-2"></i></i> --}}
+                                    <i class="fa-solid fa-circle-dollar-to-slot fa-lg me-2"></i>
+                                    {{ $order->total_amount }}
                                 </td>
                                 {{-- <td class="col-lg-1">{{$order->created_at->format('j-F-Y')}}</td> --}}
                                 <td class="col-lg-3"><i
@@ -126,7 +153,9 @@
 
                 </table>
                 <div class="mt-5">
-                    {{ $data->links() }}
+                    {{-- {{ $data->links() }} --}}
+                    {{ $data->appends(['search' => request('search')])->links() }}
+
                 </div>
             </div>
         @endif
