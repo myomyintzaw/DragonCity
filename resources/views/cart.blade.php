@@ -24,6 +24,22 @@
                     </div>
                 </div>
             </div>
+
+            {{-- <script>
+                // Load Lottie animation
+                var animation = lottie.loadAnimation({
+                    container: document.getElementById('lottie-container'),
+                    renderer: 'svg',
+                    loop: false, // run once
+                    autoplay: true,
+                    path: '/animations/success.json' // your Lottie file path
+                });
+
+                // After animation ends, redirect
+                animation.addEventListener('complete', function() {
+                    window.location.href = "{{ route('dashboard') }}"; // dragoncity.home  redirect to another page
+                });
+            </script> --}}
         @else
             <h5 class="mb-5"><i class="fa-solid fa-cart-arrow-down text-danger me-2"> </i>Shopping Cart
             </h5>
@@ -440,11 +456,22 @@
                         $('#main').remove();
 
                         $('#header').after(`
-                           <div class="alert alert-success alert-dismissible fade show text-center p-4" role="alert" style="margin-top: 90px;">
+                           <div id="lottie"  class="alert alert-success alert-dismissible fade show text-center p-4" role="alert" style="margin-top: 90px;">
                              <strong class="me-2">Order is Success!</strong> Please check order voucher in email.
-                             <button type="button" class="btn-close  " data-bs-dismiss="alert" aria-label="Close"></button>
+
                         </div>
                         `);
+                        // <button type="button" class="btn-close data-bs-dismiss="alert" aria-label="Close"> </button>
+
+                        $('#lottie').after(`<div id="lottie-container" style="width: 300px; height: 300px; margin: auto;"> <dotlottie-wc src="https://lottie.host/ad8b12d5-fbcd-491d-90ff-53f6f39cecf6/zWCyJSuU4Z.lottie"
+                  style="width: 300px;height: 300px" speed="1" autoplay loop></dotlottie-wc></div>
+                  `);
+
+                        setTimeout(function() {
+                            window.location.href =
+                                "/dashboard"; // Laravel route to dashboard
+                        },5000);
+
 
                     },
                     error: function(xhr) {
@@ -454,8 +481,6 @@
                 });
 
             });
-
-
 
 
 

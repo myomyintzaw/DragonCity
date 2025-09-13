@@ -55,6 +55,11 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('user/css/main.css') }}" rel="stylesheet">
 
+    <!-- Lottie Animation -->
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script> --}}
+
 
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script src="{{ asset('user/js/main.js') }}"></script>
