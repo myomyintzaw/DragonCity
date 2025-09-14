@@ -12,7 +12,6 @@
 @section('content')
 
     <div class="container-fluid p-5" style="margin-top: 70px;" id="main">
-
         @if (count($cart_items) == 0)
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -24,6 +23,8 @@
                     </div>
                 </div>
             </div>
+     <img src="{{ asset('images/shopping-cart.WEBP') }}" class="img-fluid" alt="">
+
 
             {{-- <script>
                 // Load Lottie animation
@@ -456,22 +457,27 @@
                         $('#main').remove();
 
                         $('#header').after(`
-                           <div id="lottie"  class="alert alert-success alert-dismissible fade show text-center p-4" role="alert" style="margin-top: 90px;">
+                           <div id="lottie"  class="alert  alert-success alert-dismissible fade show text-center p-4 col-lg-6 offset-lg-3
+                            animate__animated animate__bounce animate__rollIn " role="alert" style="margin-top: 90px;">
                              <strong class="me-2">Order is Success!</strong> Please check order voucher in email.
-
                         </div>
+
                         `);
+                        // animate__rotateInDownLeft
                         // <button type="button" class="btn-close data-bs-dismiss="alert" aria-label="Close"> </button>
 
-                        $('#lottie').after(`<div id="lottie-container" style="width: 300px; height: 300px; margin: auto;"> <dotlottie-wc src="https://lottie.host/ad8b12d5-fbcd-491d-90ff-53f6f39cecf6/zWCyJSuU4Z.lottie"
-                  style="width: 300px;height: 300px" speed="1" autoplay loop></dotlottie-wc></div>
+                        $('#lottie').after(`<div id="lottie-container" style="width: 300px; height: 300px; margin: auto;">
+                            <dotlottie-wc src="https://lottie.host/ad8b12d5-fbcd-491d-90ff-53f6f39cecf6/zWCyJSuU4Z.lottie"
+                          style="width: 300px;height: 300px" speed="1" autoplay loop></dotlottie-wc>
+                  </div>
                   `);
+                        // <dotlottie-wc src="https://lottie.host/551dce51-a382-4103-a5cb-f8fa9a1aa42c/fNiIiDgP3z.lottie" style="width: 300px;height: 300px" speed="1" autoplay loop></dotlottie-wc>
+
 
                         setTimeout(function() {
                             window.location.href =
                                 "/dashboard"; // Laravel route to dashboard
-                        },5000);
-
+                        }, 5000);
 
                     },
                     error: function(xhr) {
