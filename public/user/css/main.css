@@ -1366,9 +1366,13 @@ section {
   }
 
   .gallery .swiper-slide-active {
-    border: 6px solid var(--color-primary);
+    /* border: 6px solid var(--color-primary); */
+    /* border: 1px solid var(--color-default); */
+
     padding: 4px;
-    background: #fff;
+    /* background: #fff;#4f5b4b */
+    background: #3a3f38;
+    border-radius: 3px;
     z-index: 1;
     transform: scale(1.2);
   }

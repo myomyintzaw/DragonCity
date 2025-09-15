@@ -814,8 +814,8 @@
             <p>Check <span>Our Gallery</span></p>
         </div>
 
-        <div class="gallery-slider swiper">
-            <div class="swiper-wrapper align-items-center">
+        <div class="gallery-slider swiper" >
+            <div class="swiper-wrapper align-items-center" >
                 <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery"
                         href="user/images/laptops/image1.png"><img src="user/images/laptops/image1.png"
                             class="img-fluid" alt=""></a>
