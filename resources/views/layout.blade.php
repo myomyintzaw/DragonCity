@@ -26,6 +26,8 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css">
 
+    {{-- psbar --}}
+    <link rel="stylesheet" href="{{ asset('user/css/psbar.css') }}">
 
     {{-- Favicon --}}
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
@@ -62,6 +64,7 @@
 
 
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
     <script src="{{ asset('user/js/main.js') }}"></script>
     <script src="{{ asset('user/js/jquery-3.7.1.js') }}"></script>
     <script src="{{ asset('user/js/jquery-3.7.1.min.js') }}"></script>
@@ -293,14 +296,24 @@
 
 
                         <p><label for="">Password</label>
-                            <input type="password" name="password" placeholder="Password" id="pas"
+                            <input type="password" name="password" placeholder="Password" id="ps"
                                 class="form-control pas ">
                             <i class="bi-eye" id="togglePas"></i>
 
                         </p>
-
+                        <div class="indicator">
+                            <span class="weak"></span>
+                            <span class="medium"></span>
+                            <span class="strong"></span>
+                        </div>
+                        <div class="text" style="font-size: 12px;"></div>
+                        {{-- pass bar <div class="meter">
+                            <div class="bar" id="bar"></div>
+                        </div>
+                        <div class="strength" id="strength">Strength: —</div> --}}
 
                     </div>
+
                     <div class="modal-footer mt-2">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
@@ -312,6 +325,117 @@
         </div>
 
     </div>
+
+    <script>
+        //   const password = document.getElementById('ps');
+
+        const indicator = document.querySelector(".indicator");
+        // const input = document.querySelector(".pas");
+        //   const input=  document.getElementById("ps").addEventListener("keyup", trigger);
+        const input = document.getElementById("ps");
+        const weak = document.querySelector(".weak");
+        const medium = document.querySelector(".medium");
+        const strong = document.querySelector(".strong");
+        const text = document.querySelector(".text");
+        let regExpWeak = /[a-z]/;
+        let regExpMedium = /\d+/;
+        let regExpStrong = /.[!,@,#,$,%,^,&,*,?,_,~,`,(,)]/;
+
+        function trigger() {
+            //          const val = input.value;
+            // ...update strength bar/text...
+            // console.log('called via listener', val);
+
+            const pad = input.value;
+            console.log('called via listener', pad);
+            let no = 0;
+
+            if (pad !== "") {
+                indicator.style.display = "flex";
+
+                if (pad.length <= 3 && (pad.match(regExpWeak) || pad.match(regExpMedium) || pad.match(regExpStrong))) {
+                    no = 1;
+                }
+                if (pad.length >= 6 && (
+                        (pad.match(regExpWeak) && pad.match(regExpMedium)) ||
+                        (pad.match(regExpMedium) && pad.match(regExpStrong)) ||
+                        (pad.match(regExpWeak) && pad.match(regExpStrong))
+                    )) {
+                    no = 2;
+                }
+                if (pad.length >= 6 && pad.match(regExpWeak) && pad.match(regExpMedium) && pad.match(regExpStrong)) {
+                    no = 3;
+                }
+
+                // update UI
+                if (no === 1) {
+                    weak.classList.add("active");
+                    medium.classList.remove("active");
+                    strong.classList.remove("active");
+                    text.style.display = "block";
+                    text.textContent = "Your password is too weak";
+                    text.className = "weak";
+                } else if (no === 2) {
+                    weak.classList.add("active");
+                    medium.classList.add("active");
+                    strong.classList.remove("active");
+                    text.style.display = "block";
+                    text.textContent = "Your password is medium";
+                    text.className = "medium";
+                } else if (no === 3) {
+                    weak.classList.add("active");
+                    medium.classList.add("active");
+                    strong.classList.add("active");
+                    text.style.display = "block";
+                    text.textContent = "Your password is strong";
+                    text.className = "strong";
+                }
+            } else {
+                indicator.style.display = "none";
+                text.style.display = "none";
+            }
+
+        }
+
+        ps.addEventListener('keyup', trigger);
+
+
+
+    </script>
+
+
+    {{-- password bar <script>
+    const input = document.getElementById('pas');
+    const bar = document.getElementById('bar');
+    const strength = document.getElementById('strength');
+
+    input.addEventListener('input', () => {
+      const pw = input.value;
+      let score = 0;
+
+      if (pw.length >= 12) score += 25;
+      if (/[a-z]/.test(pw)) score += 15;
+      if (/[A-Z]/.test(pw)) score += 15;
+      if (/[0-9]/.test(pw)) score += 20;
+      if (/[^A-Za-z0-9]/.test(pw)) score += 25;
+      if (score > 100) score = 100;
+
+      bar.style.width = score + '%';
+
+      if (score < 40) {
+        bar.style.background = '#ef4444'; // red
+        strength.textContent = 'Strength: Weak';
+      } else if (score < 70) {
+        bar.style.background = '#f59e0b'; // orange
+        strength.textContent = 'Strength: Medium';
+      } else {
+        bar.style.background = '#22c55e'; // green
+        strength.textContent = 'Strength: Strong';
+      }
+
+      if (!pw.length) strength.textContent = 'Strength: —';
+    });
+  </script> --}}
 
     <!-- End Log in -->
 
