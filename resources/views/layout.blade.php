@@ -46,6 +46,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&family=Lobster&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
 
     <!-- Vendor CSS Files -->
     <link href="{{ asset('user/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -141,7 +143,7 @@
 
 
 
-    <!-- Register Modal -->
+    <!-- Register Modal  fs-5-->
 
     <div class="modal  modal-lg fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -153,7 +155,7 @@
                 <div class="modal-header justify-content-center">
                     <img class="inline-block d-flex flex-col" src="{{ asset('images/logo.png') }}" alt="logo"
                         width="80" height="80">
-                    <h1 class="text-success fw-bold fs-5 mt-2">Account Registration</h1>
+                    <h1 class="fw-bold mt-2" style="color: #64e92b">Account Registration</h1>
                 </div>
 
                 <form action="{{ route('register') }}" method="post">
@@ -194,6 +196,10 @@
                                             <i class="bi bi-eye" id="eyeIconPassword"></i>
                                         </button>
                                     </div>
+                                    <div class="meter">
+                                        <div class="bar" id="bar"></div>
+                                    </div>
+                                    <div class="strength" id="strength">Strength: —</div>
                                 </div>
 
                                 <!-- Confirm Password -->
@@ -266,19 +272,19 @@
 
 
 
-    <!-- Log in Model -->
+    <!-- Log in Model #27bf55  fs-5 fw-bolder-->
     <div class="modal fade " id="staticBackdrop-login" data-bs-backdrop="static" data-bs-keyboard="false"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content bg-transparent"
-                style="background-color: #333333;
-  box-shadow: 0 4px 12px rgba(49, 42, 42, 0.15);">
+                style="background-color: #eed8d8;
+  box-shadow: 0 4px 12px rgba(253, 251, 251, 0.15);">
                 <button type="button" class="btn-close btn-close-white offset-11 mt-3" data-bs-dismiss="modal"
                     aria-label="Close"></button>
-                <div class="modal-header justify-content-center">
+                <div class="modal-header justify-content-center" style="margin-top: -50px;">
                     <img class="inline-block" src="{{ asset('images/logo.png') }}" alt="logo" width="60"
                         height="80">
-                    <h1 class="modal-title fs-5 fw-bolder text-primary" id="staticBackdropLabel">Account Login</h1>
+                    <h1 class="modal-title " id="staticBackdropLabel" style="color: #34ff07;  font-family: Libre Baskerville, serif;">Account Login</h1>
                 </div>
                 <form action="{{ route('login') }}" method="post">
                     @csrf
@@ -299,18 +305,13 @@
                             <input type="password" name="password" placeholder="Password" id="ps"
                                 class="form-control pas ">
                             <i class="bi-eye" id="togglePas"></i>
-
                         </p>
                         <div class="indicator">
                             <span class="weak"></span>
                             <span class="medium"></span>
                             <span class="strong"></span>
                         </div>
-                        <div class="text" style="font-size: 12px;"></div>
-                        {{-- pass bar <div class="meter">
-                            <div class="bar" id="bar"></div>
-                        </div>
-                        <div class="strength" id="strength">Strength: —</div> --}}
+                        <div class="text" style="font-size: 13px;"></div>
 
                     </div>
 
@@ -325,6 +326,8 @@
         </div>
 
     </div>
+
+
 
     <script>
         //   const password = document.getElementById('ps');
@@ -394,48 +397,52 @@
                 indicator.style.display = "none";
                 text.style.display = "none";
             }
-
         }
 
         ps.addEventListener('keyup', trigger);
-
-
-
     </script>
 
 
-    {{-- password bar <script>
-    const input = document.getElementById('pas');
-    const bar = document.getElementById('bar');
-    const strength = document.getElementById('strength');
 
-    input.addEventListener('input', () => {
-      const pw = input.value;
-      let score = 0;
+    <script>
+        const inputs = document.getElementById('password');
+        console.log(inputs);
+        const bar = document.getElementById('bar');
+        const strength = document.getElementById('strength');
 
-      if (pw.length >= 12) score += 25;
-      if (/[a-z]/.test(pw)) score += 15;
-      if (/[A-Z]/.test(pw)) score += 15;
-      if (/[0-9]/.test(pw)) score += 20;
-      if (/[^A-Za-z0-9]/.test(pw)) score += 25;
-      if (score > 100) score = 100;
+        function triggers() {
+            const pw = inputs.value;
+            let score = 0;
 
-      bar.style.width = score + '%';
+            if (pw.length >= 12) score += 25;
+            if (/[a-z]/.test(pw)) score += 15;
+            if (/[A-Z]/.test(pw)) score += 15;
+            if (/[0-9]/.test(pw)) score += 20;
+            if (/[^A-Za-z0-9]/.test(pw)) score += 25;
+            if (score > 100) score = 100;
 
-      if (score < 40) {
-        bar.style.background = '#ef4444'; // red
-        strength.textContent = 'Strength: Weak';
-      } else if (score < 70) {
-        bar.style.background = '#f59e0b'; // orange
-        strength.textContent = 'Strength: Medium';
-      } else {
-        bar.style.background = '#22c55e'; // green
-        strength.textContent = 'Strength: Strong';
-      }
+            bar.style.width = score + '%';
 
-      if (!pw.length) strength.textContent = 'Strength: —';
-    });
-  </script> --}}
+            if (score < 40) {
+                bar.style.background = '#ef4444'; // red
+                strength.textContent = 'Strength: Weak';
+            } else if (score < 70) {
+                bar.style.background = '#f59e0b'; // orange
+                strength.textContent = 'Strength: Medium';
+            } else {
+                bar.style.background = '#22c55e'; // green
+                strength.textContent = 'Strength: Strong';
+            }
+
+            if (!pw.length) strength.textContent = 'Strength: —';
+
+        }
+        password.addEventListener('keyup', triggers);
+
+
+        // input.addEventListener('input', () => {
+        // });
+    </script>
 
     <!-- End Log in -->
 
